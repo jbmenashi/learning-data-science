@@ -26,3 +26,14 @@ import statsmodels.formula.api as sm
 X = np.append(arr = np.ones((148, 1)).astype(int), values = X, axis = 1)
 X_opt = X[:, [0, 1, 2, 3, 4, 5]]
 regressor_OLS = sm.OLS(endog=y, exog=X_opt).fit()
+
+#remove the highest P-value element, in this case triples
+X_opt = X[:, [0, 1, 2, 4, 5]]
+regressor_OLS = sm.OLS(endog=y, exog=X_opt).fit()
+regressor_OLS.summary()
+
+#now let's do doubles
+X_opt = X[:, [0, 1, 4, 5]]
+regressor_OLS = sm.OLS(endog=y, exog=X_opt).fit()
+regressor_OLS.summary()
+#now all the p-values are 0 (or super close to 0), so we know that hits, HR, and walks are super significant
